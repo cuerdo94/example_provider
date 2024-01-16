@@ -15,6 +15,7 @@ class _ConsumerPageState extends State<ConsumerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.amberAccent.shade100,
         appBar: AppBar(
           centerTitle: true,
           title: Text(
@@ -38,7 +39,11 @@ class _ConsumerPageState extends State<ConsumerPage> {
           context.read<CatalogProvider>().desActiveItem = item;
           context.read<CartProvider>().remove(item);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Item dismissed: ${item.name}')),
+            SnackBar(
+                content: Text(
+                  'Item dismissed: ${item.name}',
+                ),
+                duration: const Duration(milliseconds: 600)),
           );
         },
         background: Container(

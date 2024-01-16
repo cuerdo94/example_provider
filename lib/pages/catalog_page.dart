@@ -21,21 +21,29 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.shopping_bag),
-              onPressed: () {
-                Navigator.pushNamed(context, ConsumerPage.routeName);
-              },
-            )
-          ],
-        ),
-        body: ListView.builder(
-            itemCount: context.watch<CatalogProvider>().items.length,
-            itemBuilder: (BuildContext context, int index) {
-              return cardItem(context.watch<CatalogProvider>().items[index]);
-            }));
+      appBar: AppBar(
+        title: const Text("Catalog"),
+        backgroundColor: Colors.amberAccent,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_bag),
+            onPressed: () {
+              Navigator.pushNamed(context, ConsumerPage.routeName);
+            },
+          )
+        ],
+      ),
+      body: ListView.builder(
+          itemCount: context.watch<CatalogProvider>().items.length,
+          itemBuilder: (BuildContext context, int index) {
+            return cardItem(context.watch<CatalogProvider>().items[index]);
+          }),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            context.read<CatalogProvider>().add();
+          }),
+    );
   }
 
   ListTile cardItem(ItemCatalog itemCatalog, {double dimension = 40}) {
@@ -46,6 +54,7 @@ class _CatalogPageState extends State<CatalogPage> {
         width: dimension,
       ),
       title: Text(itemCatalog.item.name),
+      subtitle: Text("#${itemCatalog.item.id}"),
       trailing: IconButton(
           onPressed: () {
             context.read<CartProvider>().add(itemCatalog.item);
@@ -57,8 +66,8 @@ class _CatalogPageState extends State<CatalogPage> {
                       .watch<CartProvider>()
                       .item(itemCatalog.item)
                       .quantity,
-                  child: Icon(Icons.check))
-              : Icon(Icons.add)),
+                  child: const Icon(Icons.check))
+              : const Icon(Icons.add)),
     );
   }
 }

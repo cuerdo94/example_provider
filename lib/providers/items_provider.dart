@@ -9,6 +9,11 @@ class CatalogProvider extends ChangeNotifier {
 
   List<ItemCatalog> get items => _items;
 
+  void add() {
+    _items.add(ItemCatalog(item: Item()));
+    notifyListeners();
+  }
+
   set activeItem(ItemCatalog item) {
     if (!item.active) {
       item.active = true;

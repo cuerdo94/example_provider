@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
+      title: 'Example Provider',
       initialRoute: CatalogPage.routeName,
       routes: {
         CatalogPage.routeName: (_) => const CatalogPage(),
